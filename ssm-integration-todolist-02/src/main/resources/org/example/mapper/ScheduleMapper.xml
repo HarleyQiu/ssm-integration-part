@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.ScheduleMapper">
+
+    <resultMap id="BaseResultMap" type="org.example.pojo.Schedule">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="completed" column="completed" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,title,completed
+    </sql>
+
+    <select id="queryList" resultType="org.example.pojo.Schedule">
+        select
+        <include refid="Base_Column_List"/>
+        from schedule
+    </select>
+
+    <delete id="deleteById">
+        delete
+        from schedule
+        where id = #{id}
+    </delete>
+
+    <insert id="insert">
+        insert into schedule (title, completed) value (#{title}, #{completed});
+    </insert>
+
+    <update id="update">
+        update schedule
+        set title     = #{title},
+            completed = #{completed}
+        where id = #{id}
+    </update>
+</mapper>
