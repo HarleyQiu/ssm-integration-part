@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--
+        MyBatis核心配置文件中的标签必须要按照指定的顺序配置:
+            properties?,settings?,typeAliases?,typeHandlers?,
+            objectFactory?,objectWrapperFactory?,reflectorFactory?,
+            plugins?,environments?,databaseIdProvider?,mappers?
+    -->
+
+    <properties resource="jdbc.properties"/>
+
+    <settings>
+        <!-- 自动映射为驼峰式命名方式 默认为false -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- SLF4J 选择slf4j输出！ -->
+        <setting name="logImpl" value="SLF4J"/>
+        <!-- FULL 会自动映射任何复杂的结果集（无论是否嵌套） -->
+        <setting name="autoMappingBehavior" value="FULL"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="org.example.pojo.Employee" alias="employee"/>
+    </typeAliases>
+
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="helperDialect" value="mysql"/>
+        </plugin>
+    </plugins>
+</configuration>
